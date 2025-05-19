@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postres Deliciosos - Experiencia Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c; 
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #a8d0e6, #f0e6ef);
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
+            overflow-x: hidden; 
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .video-banner-frosted {
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(8px) saturate(150%); 
+            -webkit-backdrop-filter: blur(8px) saturate(150%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        .video-banner-frosted video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            transform: translate(-50%, -50%);
+            z-index: -1; 
+        }
+
+        .video-banner-frosted .banner-content {
+            position: relative; 
+            z-index: 1;
+            padding: 20px;
+            background-color: rgba(0,0,0,0.2); 
+            border-radius: 0.5rem;
+        }
+
+        .video-banner-frosted h1 {
+            text-shadow: 0px 2px 15px rgba(0, 0, 0, 0.3); 
+        }
+
+        /* Search Bar Styles */
+        .search-bar-outer-container {
+            position: relative; 
+            z-index: 20; 
+        }
+        
+        .search-form {
+            /* La altura ahora es controlada por la clase h-10 de Tailwind (40px) */
+            /* margin-top ajustado para centrar la nueva altura de 40px */
+            margin-top: -20px; /* Tira el formulario hacia arriba por la mitad de su nueva altura (40px / 2) */
+            background-color: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(8px) saturate(150%);
+            -webkit-backdrop-filter: blur(8px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 9999px; /* Forma de píldora */
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .search-form:hover {
+            background-color: rgba(255, 255, 255, 0.85); /* Un poco más opaco al pasar el mouse */
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-form input[type="search"] {
+            background-color: transparent; 
+            color: #1A202C; 
+            height: 100%; 
+            /* py-2.5 de Tailwind para padding vertical, contribuye a la altura total */
+        }
+
+        .search-form input[type="search"]::placeholder {
+            color: #4A5568; 
+            opacity: 0.9;
+        }
+        
+        .search-form input[type="search"]::-webkit-search-cancel-button,
+        .search-form input[type="search"]::-webkit-search-decoration {
+          -webkit-appearance: none;
+          appearance: none;
+        }
+
+
+        .frosted-glass {
+            background-color: rgba(255, 255, 255, 0.55); 
+            backdrop-filter: blur(10px) saturate(120%);
+            -webkit-backdrop-filter: blur(10px) saturate(120%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17); 
+            border-radius: 1rem; 
+        }
+
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.22);
+        }
+        
+        .checkout-item {
+            border-bottom: 1px solid rgba(200, 200, 220, 0.3); 
+        }
+        .checkout-item:last-child {
+            border-bottom: none;
+        }
+
+        .btn-primary {
+            background-color: #5A67D8; 
+            color: white;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 14px 0 rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover {
+            background-color: #434190; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0,0,0,0.15);
+        }
+        .btn-primary:active {
+            transform: translateY(0px);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.3); 
+            color: #2d3748; 
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 14px 0 rgba(0,0,0,0.05);
+        }
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0,0,0,0.1);
+        }
+         .btn-secondary:active {
+            transform: translateY(0px);
+        }
+
+        .payment-methods {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-out, opacity 0.6s ease-out, transform 0.6s ease-out;
+            opacity: 0;
+            transform: translateY(-10px);
+            border-top: 1px solid rgba(200, 200, 220, 0.3);
+        }
+        .payment-methods.active {
+            max-height: 500px; 
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .checkout-items-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .checkout-items-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 10px;
+        }
+        .checkout-items-container::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2); 
+            border-radius: 10px;
+        }
+        .checkout-items-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .text-content-primary { color: #1A202C; } 
+        .text-content-secondary { color: #4A5568; } 
+        .text-content-accent { color: #5A67D8; }
+
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="video-banner-frosted text-center">
+        <video autoplay loop muted playsinline>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+        <div class="banner-content">
+             <h1 class="text-5xl md:text-6xl font-bold text-white">Descubre Nuestros Postres</h1>
+        </div>
+    </header>
+
+    <div class="search-bar-outer-container w-full">
+        <div class="search-bar-inner-container container mx-auto px-4 flex justify-center">
+            <form class="search-form relative flex items-center w-full max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-3xl h-10">
+                <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 z-10">
+                    <i class="fas fa-search"></i>
+                </span>
+                <input type="search" 
+                       placeholder="Buscar postres deliciosos..." 
+                       class="w-full h-full pl-12 pr-4 py-2.5 rounded-full text-base text-content-primary focus:outline-none focus:ring-2 focus:ring-indigo-400/60 appearance-none">
+            </form>
+        </div>
+    </div>
+
+    <main class="flex-grow container mx-auto px-4 pt-12 lg:pt-16 pb-8 lg:pb-12 flex flex-col lg:flex-row gap-8 lg:gap-12">
+        
+        <section class="w-full lg:w-3/5">
+            <h2 class="text-4xl font-bold mb-8 text-white" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.3);">Nuestros Postres Estrella</h2>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                </div>
+        </section>
+
+        <aside class="w-full lg:w-2/5 p-6 lg:p-8 frosted-glass sticky top-8 self-start" style="max-height: calc(100vh - 80px);">
+            <h2 class="text-3xl font-semibold mb-6 text-content-primary border-b border-gray-300/50 pb-3">Tu Pedido</h2>
+            
+            <div id="checkout-items-container" class="checkout-items-container overflow-y-auto mb-6" style="max-height: calc(100vh - 400px); min-height: 120px;">
+                <p id="empty-cart-message" class="text-content-secondary italic">Aún no has agregado postres.</p>
+            </div>
+
+            <div class="border-t border-gray-300/50 pt-6">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-xl font-medium text-content-secondary">Total:</span>
+                    <span id="checkout-total" class="text-3xl font-bold text-content-primary">$0.00</span>
+                </div>
+
+                <div class="space-y-4">
+                    <button id="pay-button" class="w-full btn-primary font-semibold py-3.5 rounded-xl text-lg shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-indigo-300/70">
+                        <i class="fas fa-credit-card mr-2"></i>Pagar
+                    </button>
+                    <button id="cancel-button" class="w-full btn-secondary font-semibold py-3.5 rounded-xl text-lg shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300/70">
+                        <i class="fas fa-times-circle mr-2"></i>Cancelar Pedido
+                    </button>
+                </div>
+            </div>
+
+            <div id="payment-methods" class="payment-methods mt-6 p-6 frosted-glass border-t-0 rounded-xl">
+                 <h3 class="text-xl font-semibold mb-4 text-content-primary">Selecciona un Método de Pago</h3>
+                <ul class="space-y-3">
+                    <li><button class="w-full text-left p-3 hover:bg-white/30 rounded-lg payment-option transition-all duration-200" data-method="credit-card"><i class="fas fa-credit-card mr-3 text-indigo-500"></i>Tarjeta de Crédito/Débito</button></li>
+                    <li><button class="w-full text-left p-3 hover:bg-white/30 rounded-lg payment-option transition-all duration-200" data-method="paypal"><i class="fab fa-paypal mr-3 text-blue-600"></i>PayPal</button></li>
+                    <li><button class="w-full text-left p-3 hover:bg-white/30 rounded-lg payment-option transition-all duration-200" data-method="transfer"><i class="fas fa-university mr-3 text-green-500"></i>Transferencia Bancaria</button></li>
+                </ul>
+                <p id="payment-message" class="mt-4 text-sm text-green-700 font-medium"></p>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        // Datos de ejemplo para los postres
+        const products = [
+            { id: 1, name: "Pastel de Chocolate Intenso", price: 250.00, image: "https://placehold.co/400x300/A0522D/FFFFFF?text=Pastel+Chocolate&font=inter", description: "Capas de bizcocho de chocolate con ganache sedoso." },
+            { id: 2, name: "Cheesecake de Fresas Frescas", price: 220.50, image: "https://placehold.co/400x300/FFB6C1/000000?text=Cheesecake+Fresa&font=inter", description: "Cremoso cheesecake con topping de fresas naturales." },
+            { id: 3, name: "Tiramisú Clásico Italiano", price: 180.75, image: "https://placehold.co/400x300/D2B48C/FFFFFF?text=Tiramisú&font=inter", description: "Auténtico sabor italiano con café y mascarpone." },
+            { id: 4, name: "Macarons Surtidos (Docena)", price: 300.00, image: "https://placehold.co/400x300/ADD8E6/000000?text=Macarons&font=inter", description: "Delicados macarons en una variedad de sabores." },
+            { id: 5, name: "Brownie con Nuez Pecana", price: 95.00, image: "https://placehold.co/400x300/8B4513/FFFFFF?text=Brownie&font=inter", description: "Brownie denso y chocolatoso con trozos de nuez." },
+            { id: 6, name: "Flan Napolitano Tradicional", price: 150.00, image: "https://placehold.co/400x300/FFDEAD/000000?text=Flan&font=inter", description: "Suave y dulce flan con caramelo dorado." }
+        ];
+
+        let cart = []; // El carrito de compras
+
+        // Elementos del DOM
+        const productGrid = document.getElementById('product-grid');
+        const checkoutItemsContainer = document.getElementById('checkout-items-container');
+        const checkoutTotalElement = document.getElementById('checkout-total');
+        const payButton = document.getElementById('pay-button');
+        const cancelButton = document.getElementById('cancel-button');
+        const paymentMethodsSection = document.getElementById('payment-methods');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const paymentMessage = document.getElementById('payment-message');
+
+        // --- RENDERIZACIÓN DE PRODUCTOS ---
+        function renderProducts(filteredProducts = products) { // Acepta una lista de productos para renderizar
+            productGrid.innerHTML = ''; 
+            filteredProducts.forEach(product => { // Itera sobre la lista de productos proporcionada
+                const card = `
+                    <div class="product-card frosted-glass overflow-hidden flex flex-col">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover">
+                        <div class="p-5 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-content-primary mb-2">${product.name}</h3>
+                            <p class="text-sm text-content-secondary mb-4 flex-grow">${product.description}</p>
+                            <div class="flex justify-between items-center mt-auto">
+                                <span class="text-2xl font-bold text-content-primary">$${product.price.toFixed(2)}</span>
+                                <button class="add-to-cart-btn btn-primary text-sm font-medium py-2.5 px-5 rounded-lg shadow-md hover:shadow-lg" data-id="${product.id}">
+                                    <i class="fas fa-cart-plus mr-1.5"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productGrid.innerHTML += card;
+            });
+
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = parseInt(event.target.closest('button').dataset.id);
+                    addToCart(productId);
+                });
+            });
+        }
+
+        // --- MANEJO DEL CARRITO ---
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId); // Busca en la lista original de productos
+            if (product) {
+                cart.push({...product, cartItemId: Date.now() + Math.random() }); 
+                renderCheckout();
+                payButton.classList.add('animate-bounce');
+                checkoutTotalElement.classList.add('scale-110', 'text-content-accent');
+                setTimeout(() => {
+                    payButton.classList.remove('animate-bounce');
+                    checkoutTotalElement.classList.remove('scale-110', 'text-content-accent');
+                }, 800);
+            }
+        }
+
+        function removeFromCart(cartItemId) {
+            cart = cart.filter(item => item.cartItemId !== cartItemId);
+            renderCheckout();
+        }
+
+        function renderCheckout() {
+            checkoutItemsContainer.innerHTML = ''; 
+            let total = 0;
+
+            if (cart.length === 0) {
+                if(emptyCartMessage) emptyCartMessage.style.display = 'block';
+                checkoutItemsContainer.innerHTML = `<p id="empty-cart-message" class="text-content-secondary italic">Aún no has agregado postres.</p>`;
+            } else {
+                if(emptyCartMessage) emptyCartMessage.style.display = 'none';
+                cart.forEach(item => {
+                    const itemElement = `
+                        <div class="checkout-item flex justify-between items-center py-3.5 px-1">
+                            <div>
+                                <p class="font-medium text-content-primary">${item.name}</p>
+                                <p class="text-sm text-content-secondary">$${item.price.toFixed(2)}</p>
+                            </div>
+                            <button class="remove-from-cart-btn text-red-500 hover:text-red-700 text-lg p-1 rounded-full hover:bg-red-100/50 transition-colors" data-cart-item-id="${item.cartItemId}">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                    checkoutItemsContainer.innerHTML += itemElement;
+                    total += item.price;
+                });
+
+                document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const cartItemId = parseFloat(event.currentTarget.dataset.cartItemId);
+                        removeFromCart(cartItemId);
+                    });
+                });
+            }
+            
+            checkoutTotalElement.textContent = `$${total.toFixed(2)}`;
+            if (cart.length === 0 && paymentMethodsSection.classList.contains('active')) {
+                paymentMethodsSection.classList.remove('active');
+                paymentMessage.textContent = '';
+            }
+        }
+
+        // --- MANEJO DE BOTONES PRINCIPALES ---
+        payButton.addEventListener('click', () => {
+            if (cart.length === 0) {
+                const tempAlert = document.createElement('div');
+                tempAlert.textContent = "Tu carrito está vacío. ¡Agrega algunos postres!";
+                tempAlert.style.cssText = "position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color: #FF7F50; color:white; padding:15px 25px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.2); z-index:1000; font-weight:500;";
+                document.body.appendChild(tempAlert);
+                setTimeout(() => tempAlert.remove(), 3000);
+                return;
+            }
+            paymentMethodsSection.classList.toggle('active');
+            if (paymentMethodsSection.classList.contains('active')) {
+                paymentMethodsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            paymentMessage.textContent = ''; 
+        });
+
+        cancelButton.addEventListener('click', () => {
+            if (cart.length > 0) {
+                if (confirm("¿Estás seguro de que quieres cancelar tu pedido y vaciar el carrito?")) {
+                    cart = [];
+                    renderCheckout();
+                    paymentMethodsSection.classList.remove('active');
+                    paymentMessage.textContent = '';
+                }
+            } else {
+                const tempAlert = document.createElement('div');
+                tempAlert.textContent = "Tu carrito ya está vacío.";
+                tempAlert.style.cssText = "position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color: #D2B48C; color:#4A3B31; padding:15px 25px; border-radius:8px; box-shadow:0 4px 15px rgba(0,0,0,0.2); z-index:1000; font-weight:500;";
+                document.body.appendChild(tempAlert);
+                setTimeout(() => tempAlert.remove(), 3000);
+            }
+        });
+
+        // --- MANEJO DE OPCIONES DE PAGO ---
+        document.querySelectorAll('.payment-option').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const method = event.currentTarget.dataset.method;
+                paymentMessage.textContent = `Procesando pago con ${method.replace('-', ' ')}...`;
+                paymentMessage.classList.remove('text-green-700');
+                paymentMessage.classList.add('text-blue-600');
+                
+                setTimeout(() => {
+                    cart = [];
+                    renderCheckout();
+                    paymentMethodsSection.classList.remove('active');
+                    paymentMessage.classList.remove('text-blue-600');
+                    paymentMessage.classList.add('text-green-700');
+                    paymentMessage.textContent = '¡Pedido completado! Gracias por tu compra.';
+                     setTimeout(() => paymentMessage.textContent = '', 5000);
+                }, 2500);
+            });
+        });
+
+        // --- LÓGICA DE BÚSQUEDA ---
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchInput = event.target.querySelector('input[type="search"]');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            if (searchTerm === "") {
+                renderProducts(products); // Muestra todos los productos si la búsqueda está vacía
+                return;
+            }
+
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filteredProducts); // Renderiza solo los productos filtrados
+        }
+
+
+        // --- INICIALIZACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(); // Renderiza todos los productos inicialmente
+            renderCheckout(); 
+            
+            const searchForm = document.querySelector('.search-form');
+            searchForm.addEventListener('submit', handleSearch); // Llama a handleSearch en submit
+
+            // Opcional: filtrar mientras se escribe (con un pequeño debounce para rendimiento)
+            let debounceTimer;
+            const searchInput = searchForm.querySelector('input[type="search"]');
+            searchInput.addEventListener('input', () => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    const searchTerm = searchInput.value.toLowerCase().trim();
+                     if (searchTerm === "") {
+                        renderProducts(products); 
+                        return;
+                    }
+                    const filteredProducts = products.filter(product => 
+                        product.name.toLowerCase().includes(searchTerm) ||
+                        product.description.toLowerCase().includes(searchTerm)
+                    );
+                    renderProducts(filteredProducts);
+                }, 300); // Espera 300ms después de que el usuario deja de escribir
+            });
+        });
+
+    </script>
+</body>
+</html>
